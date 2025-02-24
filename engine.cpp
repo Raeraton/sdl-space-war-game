@@ -41,26 +41,19 @@ namespace game::engine {
 
 
 
-
-
-    void Phicics_engine::update_objects() {
-        for( auto& object : _objects ) {
-            if( object->_is_existing ) {
-                object->update();
-            }
+    Phicics_engine::~Phicics_engine() {
+        for( int i = 0; i < _objects.size(); ++i ) {
+            remove_object(i);
         }
     }
 
+    void Phicics_engine::update_objects() {
 
-    void Phicics_engine::handle_collisions() {
         for(int i=0;  i<_objects.size(); i++) {
-            if( !_objects[i]->_is_existing )
-                continue;
+
+            _objects[i]->update();
 
             for(int j=i+1;  j<_objects.size();  j++) {
-                if( !_objects[j]->_is_existing )
-                    continue;
-
                 if(  test_for_collision( *_objects[i], *_objects[j] )  ) {
                     _objects[i]->_collision_behavior( _objects[i], _objects[j], true );
                     break;    // breaks out the inner for loop....
@@ -70,6 +63,7 @@ namespace game::engine {
         }
 
     }
+
 
     void Phicics_engine::display_objects( display::Screen& screen ) const {
 

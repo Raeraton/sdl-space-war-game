@@ -12,7 +12,6 @@
 
 namespace behaviors {
 
-
     void default_collision( game::engine::Object* self, game::engine::Object* other, bool is_collider );
 
 

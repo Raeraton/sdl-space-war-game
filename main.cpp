@@ -19,10 +19,10 @@ int main(int argc, char* args []) {
         .player_ship_nose_len = 15,
         .player_ship_back_len = 5,
         .player_shoot_delay = 2,
-        .player_hvp_speed = 10,
+        .player_hvp_speed = 100,
         .player_hvp_radius = 3,
         .player_hvp_mass = 1,
-        .player_ship_mass = 10,
+        .player_ship_mass = 5,
         .player_rotator_force = 3.141592653589793,
         .player_engine_force = 50,
         .player_health = 10
@@ -42,8 +42,8 @@ int main(int argc, char* args []) {
 
     game::engine::Phicics_engine engine{};
 
-    game::Player player1( { 'w', 's', 'a', 'd' }, {200, 200}, engine );
-    game::Player player2( { 'i', 'k', 'j', 'l' }, {300, 300}, engine );
+    game::Player player1( { 'w', 's', 'a', 'd' }, {200, 200}, &engine );
+    game::Player player2( { 'i', 'k', 'j', 'l' }, {300, 300}, &engine );
 
 
     // main loop
@@ -69,14 +69,14 @@ int main(int argc, char* args []) {
         player1.handle_input();
         player2.handle_input();
 
-        engine.update_objects();
-        engine.handle_collisions();
+
         engine.delete_notexisting_object();
+        engine.update_objects();
 
 
         screen.fill( display::Color_rgba{50, 51, 53, 255} );
-
         engine.display_objects( screen );
+
         screen.draw_shapes(  player1.get_player_specific_graphics()  );
         screen.draw_shapes(  player2.get_player_specific_graphics()  );
 

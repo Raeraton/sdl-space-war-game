@@ -61,9 +61,9 @@ namespace game::engine {
         std::vector<Object*> _objects{};
     public:
         Phicics_engine() = default;
+        ~Phicics_engine();
 
         void update_objects();
-        void handle_collisions();
         void display_objects( display::Screen& screen ) const;
         void delete_notexisting_object();
 
