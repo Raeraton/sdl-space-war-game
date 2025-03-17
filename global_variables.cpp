@@ -21,8 +21,8 @@ global_variables::Global_data GLOBAL_DATA;
 global_variables::Global_data& global_variables::get_global_data() {
     return GLOBAL_DATA;
 }
-void global_variables::set_global_data( const global_variables::Global_data& gd ) {
-    GLOBAL_DATA = gd;
+void global_variables::set_global_data( const global_variables::Global_data* gd ) {
+    GLOBAL_DATA = *gd;
 }
 
 

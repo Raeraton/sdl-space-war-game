@@ -24,15 +24,26 @@ int inputs::Keyboard::last_released() const {
     return _last_released;
 }
 
+void inputs::Keyboard::flush() {
+    _last_pressed = 0;
+    _last_released = 0;
+    for( auto& pair : _keys ) {
+        pair.second = false;
+    }
+}
 
 
-void inputs::Keyboard::update( SDL_Event& event ) {
+void inputs::Keyboard::update(const SDL_Event& event ) {
 
     if( event.type == SDL_KEYDOWN ) {
         _keys[event.key.keysym.sym] = true;
+        if( _last_released == event.key.keysym.sym )
+            _last_released = 0;
         _last_pressed = event.key.keysym.sym;
     }else if(event.type == SDL_KEYUP) {
         _keys[event.key.keysym.sym] = false;
+        if( _last_pressed == event.key.keysym.sym )
+            _last_pressed = 0;
         _last_released = event.key.keysym.sym;
     }
 

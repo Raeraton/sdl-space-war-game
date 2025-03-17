@@ -36,9 +36,9 @@ namespace animations {
             ._type = 't',
             ._color = { 0xff, 0xff, 0xff, 0xff },
             ._points = {
-                game::vector2_to_pixel_coord(  self._position+game::polar_to_vector2( global_data.player_hvp_radius, self._direction ) ),
-                game::vector2_to_pixel_coord( self._position+game::polar_to_vector2( global_data.player_hvp_radius, self._direction+2.0943951024f ) ),
-                game::vector2_to_pixel_coord( self._position+game::polar_to_vector2( global_data.player_hvp_radius, self._direction+4.1887902048f ) )
+                game::vector2_to_pixel_coord(  self._position+game::polar_to_vector2( self.get_radius(), self._direction ) ),
+                game::vector2_to_pixel_coord( self._position+game::polar_to_vector2( self.get_radius(), self._direction+2.0943951024f ) ),
+                game::vector2_to_pixel_coord( self._position+game::polar_to_vector2( self.get_radius(), self._direction+4.1887902048f ) )
             }
         } );
 

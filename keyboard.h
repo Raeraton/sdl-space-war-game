@@ -22,8 +22,9 @@ namespace inputs {
         bool is_pressed( int );
         int last_pressed() const;
         int last_released() const;
+        void flush();
 
-        void update( SDL_Event& event );
+        void update(const SDL_Event& event );
     };
 
 }

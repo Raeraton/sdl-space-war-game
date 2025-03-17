@@ -3,6 +3,7 @@
 //
 
 #include "display.h"
+#include "global_variables.h"
 
 #include <cstdio>
 
@@ -91,7 +92,8 @@ void display::Screen::draw_shapes( const std::vector<display::Shape>& shapes ) {
 
 
 
-void display::Screen::display() {
+
+void display::Screen::display() const {
     SDL_RenderPresent(_renderer);
 }
 
@@ -156,4 +158,13 @@ static void draw_polygon(SDL_Renderer* rendr, const display::Shape& shape ) {
 
     delete[] vertices;
 
+}
+
+
+
+void display::Screen::update_size() const {
+    static auto& width = global_variables::get_global_data().screen_width;
+    static auto& height = global_variables::get_global_data().screen_height;
+
+    SDL_GetWindowSize( _window, &width, &height );
 }

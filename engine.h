@@ -13,36 +13,40 @@
 
 namespace game::engine {
 
+    class Phicics_engine;
+
+
 
     class Object {
         float _radius{};
         float _mass{};
 
     public:
-        bool _is_existing{};
-        const bool _is_dynamic{};
+        float _energy_of_last_collision = 0.0f;
+        bool _is_dynamic{};
         Vector2 _position{};
         Vector2 _velocity{};
         float _direction{};
         float _angular_velocity{};
+        float _numbers[16]{};   // numbers to use
 
         std::vector<display::Shape> (*_get_graphics)( const Object& self ){};   // no need to use lambda...
-        void (*_collision_behavior)( Object* self, Object* other, bool is_collider ){};  // is_collider true: ha ő vlt az 1. aki ütközött
+        void (*_update_behavior)( Object* );
+        void (*_collision_behavior)( Object* self, Object* other, bool is_collider );  // is_collider true: ha ő vlt az 1. aki ütközöt
+        void (*_death_behavior)( game::engine::Object*, game::engine::Phicics_engine* );
 
         Object() = default;
         Object( bool is_dynamic, float radius, float mass, Vector2 position, Vector2 velocity,
-                float direction, float angular_velocity,
-                std::vector<display::Shape> (*get_graphics)( const Object& ),
-                void (*collision_behavior)( Object*, Object*, bool )) :
-                _is_dynamic(is_dynamic), _radius(radius), _mass(mass), _is_existing(true),
-                _position(position), _velocity(velocity), _direction(direction), _angular_velocity(angular_velocity),
-                _get_graphics(get_graphics), _collision_behavior(collision_behavior) {}
+                float direction, float angular_velocity) :
+                _is_dynamic(is_dynamic), _radius(radius), _mass(mass),
+                _position(position), _velocity(velocity), _direction(direction), _angular_velocity(angular_velocity){}
         // picit csunya, de egyérelmű
 
 
 
         float get_radius() const { return _radius; }
         float get_mass() const { return _mass; }
+        inline float get_kinetic_energy() const;
 
 
         void accelerate( const Vector2& acceleration );
@@ -50,6 +54,7 @@ namespace game::engine {
 
         void update();
 
+        void operator=(const game::engine::Object &other);
     };
 
 

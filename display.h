@@ -50,7 +50,7 @@ p: polygon
 
 
         public:
-        Screen( const char* title, int w, int h, Uint32 window_flag=SDL_WINDOW_SHOWN, Uint32 renderer_flag=SDL_RENDERER_ACCELERATED );
+        Screen( const char* title, int w, int h, Uint32 window_flag=SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE, Uint32 renderer_flag=SDL_RENDERER_ACCELERATED );
         ~Screen();
 
         bool is_open() const;
@@ -60,7 +60,8 @@ p: polygon
         void draw_shape( const Shape& shape );
         void draw_shapes( const std::vector<Shape>& shapes );
 
-        void display();
+        void display() const;
+        void update_size() const;
 
     };
 

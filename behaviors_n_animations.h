@@ -12,8 +12,13 @@
 
 namespace behaviors {
 
+    void default_movement( game::engine::Object* self );
     void default_collision( game::engine::Object* self, game::engine::Object* other, bool is_collider );
+    void default_death( game::engine::Object* self, game::engine::Phicics_engine* phicics_engine );
 
+    void bullet_movement( game::engine::Object* self );
+    void bullet_collision( game::engine::Object* self, game::engine::Object* other, bool is_collider );
+    void bullet_death( game::engine::Object* self, game::engine::Phicics_engine* phicics_engine );
 
 }
 
